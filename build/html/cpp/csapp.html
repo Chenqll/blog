@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="leetcode" href="../al/leetcode.html" /><link rel="prev" title="CSAPP_learn" href="../cpp/CSAPP/csapp.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
     <meta name="generator" content="sphinx-5.0.1, furo 2022.06.04.1"/>
-        <title>DeepLearning - ChenBlog 1.0 documentation</title>
+        <title>CSAPP_learn - ChenBlog 1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -134,7 +134,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -155,7 +155,7 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../oneflow/index.html">oneflow</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../oneflow/build_oneflow/build_oneflow.html">build oneflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../oneflow/DeepLearningFramwork/DeepLearningFramwork.html">Framwork of DeepLearning</a></li>
@@ -163,11 +163,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../oneflow/docs/docs.html">docs</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../cpp/index.html">cpp</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../cpp/CSAPP/csapp.html">CSAPP_learn</a></li>
-</ul>
-</li>
-<li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">DeepLearning</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+<li class="toctree-l1 has-children"><a class="reference internal" href="index.html">cpp</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../al/leetcode.html">leetcode</a></li>
@@ -198,16 +194,82 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section id="deeplearning">
-<h1>DeepLearning<a class="headerlink" href="#deeplearning" title="Permalink to this heading">#</a></h1>
-<div class="toctree-wrapper compound">
-</div>
+          <section id="csapp-learn">
+<h1>CSAPP_learn<a class="headerlink" href="#csapp-learn" title="Permalink to this heading">#</a></h1>
+<section id="id1">
+<h2>参考资料<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>https://github.com/vonzhou/CSAPP</p></li>
+</ul>
+</section>
+<section id="id2">
+<h2>1.计算机系统漫游<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<section id="id3">
+<h3>1.1 信息<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>源文件由bit（位0,1）表示，8bit=1字节，用1字节表示1字符，32位系统4字节=1字长，64位系统8字节=1字长</p></li>
+<li><p>信息是由<code class="docutils literal notranslate"><span class="pre">bit和上下文信息</span></code>表示的，同样的字节序列在不同的解释方式下可以表达不同的信息</p></li>
+</ul>
+</section>
+<section id="id4">
+<h3>1.2 编译系统<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>源文件(文本文件.c)--[<code class="docutils literal notranslate"><span class="pre">预处理器</span></code>(cp,导包，修改源文件)]---&gt;</p></li>
+<li><p>源文件(被修改的源.i)---[<code class="docutils literal notranslate"><span class="pre">编译器</span></code>(ccl,修改为汇编语言)]--&gt;</p></li>
+<li><p>汇编程序(汇编文本文件.s)---[<code class="docutils literal notranslate"><span class="pre">汇编器</span></code>(as)]--&gt;</p></li>
+<li><p>机器语言指令(二进制文件.o)---[<code class="docutils literal notranslate"><span class="pre">连接器</span></code>(ld,合并调用的标准库函数的.o文件)]---&gt;</p></li>
+<li><p>可执行程序</p></li>
+</ul>
+</section>
+<section id="id5">
+<h3>1.3 硬件组成<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>.c文件储存在磁盘</p></li>
+<li><p>io系统输入--&gt;外壳shell接收输入--&gt;将命令存入寄存器--&gt;将命令存入主存--&gt;命令结束./hello</p></li>
+<li><p>磁盘将编译好的数据和code复制到主存，主存再将其复制到寄存器，寄存器再将其复制到io显示设备</p></li>
+<li><p>上述过程复制过程冗余，高速缓存出现。存储器结构层次可以帮助加快执行效率--<code class="docutils literal notranslate"><span class="pre">上一层的存储器作为下一层存储器的高速缓存</span></code>。传统中，寄存器就是主存的高速缓存，寄存器容量下，所以读取速度快。新型的存储器结构是在寄存器下多了三层<code class="docutils literal notranslate"><span class="pre">L1，L2，L3</span></code>的高速缓存</p></li>
+<li><p>网络可以看成一个特殊的io设备</p></li>
+</ul>
+</section>
+<section id="id6">
+<h3>1.4 操作系统<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>操作系统是软件与硬件的中间件，通过一系列软件对硬件的抽象表示，提供有效简单的管理硬件的方法。其中包括<code class="docutils literal notranslate"><span class="pre">将io设备抽象为文件，将io设备和主存抽象为虚拟存储器，将io设备、主存、处理器cpu抽象为进程</span></code>。</p></li>
+</ul>
+</section>
+<section id="id7">
+<h3>1.5 进程，并发，并行<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>一个系统可以同时运行多个进程，这是通过操作系统对多个进程指令进行<code class="docutils literal notranslate"><span class="pre">交错执行</span></code>实现的</p></li>
+<li><p>虚拟存储器-为每个进程提供存储唯一的假象。包括了程序代码和数据、堆（标准函数库）、共享库、用户栈（运行时用户定义的函数）</p></li>
+</ul>
+</section>
+</section>
+<section id="id8">
+<h2>信息的处理和表示<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h2>
+<section id="id9">
+<h3>2.1 信息存储<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h3>
+<ul>
+<li><p>8 bit = 1 byte 一字节是最小的可寻址的存储器单元，二进制表示的值域为00000000-11111111，转换为十进制为0-255，转换为16进制为00-FF</p></li>
+<li><p>十进制与十六进制互相转化<a class="reference external" href="CSAPP_learn_base%5Cchapter2%5Cex2hd.py">python代码</a></p></li>
+<li><p>二进制与十六进制相互转化，将十六进制的每一个位，转换为十进制，根据十进制的数字转换为四个位的二进制，十六进制的一位表示16，而二进制的四个位2^4也等于16，所以0xFFFFFFFB =&gt; 1111 1111 1111 1111 1111 1111 1111 1011</p></li>
+<li><p>字长，表明了整数和指针数据的标称大小，决定了虚拟空间地址的最大大小，32位的系统，虚拟地址空间为2的31次方bit，也就是4GB。</p></li>
+<li><p>C语言中char 1B,short 2B, int 4B, 长整数和指针长度等于机器的字长（这里8）,float=4B, double=8B</p></li>
+<li><p>大小端 ：
+0x12345678 怎么放置到内存中？</p>
+<p>将数据的低位（78），放到内存地址的低位，这种放置的方式，小端方式，little endian</p>
+<p>将数据的高位（12），放到内存地址的低位，这种方式的方式，大端方式，big endian</p>
+<p>x86 芯片、ARM 默认 小端方式。</p>
+</li>
+</ul>
+</section>
+</section>
 </section>
 
         </article>
@@ -215,26 +277,8 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../al/leetcode.html">
-              <div class="page-info">
-                <div class="context">
-                  <span>Next</span>
-                </div>
-                <div class="title">leetcode</div>
-              </div>
-              <svg><use href="#svg-arrow-right"></use></svg>
-            </a>
-          <a class="prev-page" href="../cpp/CSAPP/csapp.html">
-              <svg><use href="#svg-arrow-right"></use></svg>
-              <div class="page-info">
-                <div class="context">
-                  <span>Previous</span>
-                </div>
-                
-                <div class="title">CSAPP_learn</div>
-                
-              </div>
-            </a>
+          
+          
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
@@ -255,8 +299,39 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">CSAPP_learn</a><ul>
+<li><a class="reference internal" href="#id1">参考资料</a></li>
+<li><a class="reference internal" href="#id2">1.计算机系统漫游</a><ul>
+<li><a class="reference internal" href="#id3">1.1 信息</a></li>
+<li><a class="reference internal" href="#id4">1.2 编译系统</a></li>
+<li><a class="reference internal" href="#id5">1.3 硬件组成</a></li>
+<li><a class="reference internal" href="#id6">1.4 操作系统</a></li>
+<li><a class="reference internal" href="#id7">1.5 进程，并发，并行</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id8">信息的处理和表示</a><ul>
+<li><a class="reference internal" href="#id9">2.1 信息存储</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
