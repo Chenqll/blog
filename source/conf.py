@@ -50,7 +50,7 @@ exclude_patterns = []
 
 extensions = [
      'recommonmark',
-     'sphinx_markdown_tables'
+     'myst-parser'
  ]
 
 
