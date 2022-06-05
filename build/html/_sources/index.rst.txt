@@ -11,8 +11,6 @@ Welcome to ChenBlog's documentation!
    :caption: Contents:
 
    oneflow/index
-   about
-
 
 
 Indices and tables
