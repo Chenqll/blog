@@ -50,7 +50,6 @@ exclude_patterns = []
 
 extensions = [
      'recommonmark',
-     'myst-parser'
  ]
 
 
