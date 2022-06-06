@@ -12,7 +12,7 @@ Welcome to ChenBlog's documentation!
 
    oneflow/index
    cpp/csapp
-   dp/lihang_statics
+   dp/index
    al/leetcode
 
 

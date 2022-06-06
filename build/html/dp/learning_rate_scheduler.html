@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="统计学习" href="lihang/lihang_statics.html" /><link rel="prev" title="CSAPP_learn" href="../cpp/csapp.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="leetcode" href="../al/leetcode.html" /><link rel="prev" title="统计学习" href="lihang_statics.html" />
 
     <meta name="generator" content="sphinx-5.0.1, furo 2022.06.04.1"/>
-        <title>dp - ChenBlog 1.0 documentation</title>
+        <title>Learning rate scheduler - ChenBlog 1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -134,7 +134,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -164,12 +164,8 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../cpp/csapp.html">CSAPP_learn</a></li>
-<li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">dp</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="lihang/lihang_statics.html">统计学习</a></li>
-<li class="toctree-l2"><a class="reference internal" href="lihang/lihang_statics.html#learning-rate-scheduler">Learning rate scheduler</a></li>
-<li class="toctree-l2"><a class="reference internal" href="general/general.html">Learning rate scheduler</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="lihang_statics.html">统计学习</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Learning rate scheduler</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../al/leetcode.html">leetcode</a></li>
 </ul>
 
@@ -198,32 +194,93 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section id="dp">
-<h1>dp<a class="headerlink" href="#dp" title="Permalink to this heading">#</a></h1>
-<div class="toctree-wrapper compound">
+          <section id="learning-rate-scheduler">
+<h1>Learning rate scheduler<a class="headerlink" href="#learning-rate-scheduler" title="Permalink to this heading">#</a></h1>
+<section id="reference">
+<h2>reference<a class="headerlink" href="#reference" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">https://www.cnblogs.com/peachtea/p/13532209.html</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">https://zhuanlan.zhihu.com/p/520719314</span></code></p></li>
+</ul>
+</section>
+<section id="overview">
+<h2>overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="lihang/lihang_statics.html">统计学习</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="lihang/lihang_statics.html#id2">第一章 统计学习及监督学习概论</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="lihang/lihang_statics.html#learning-rate-scheduler">Learning rate scheduler</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="lihang/lihang_statics.html#reference">reference</a></li>
-<li class="toctree-l2"><a class="reference internal" href="lihang/lihang_statics.html#overview">overview</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="general/general.html">Learning rate scheduler</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="general/general.html#reference">reference</a></li>
-<li class="toctree-l2"><a class="reference internal" href="general/general.html#overview">overview</a></li>
-</ul>
-</li>
-</ul>
+<li><p>lr --&gt; optimizer</p></li>
+<li><p>Pytorch 有6种学习率调整策略，都继承自 <code class="docutils literal notranslate"><span class="pre">class_LRScheduler</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>  class _LRScheduler(object):
+
+  def __init__(self, optimizer, last_epoch=-1, verbose=False):
+      ....
+      ....
+      主要得到 optimizer ，last_epoch 参数
+</pre></div>
 </div>
+</li>
+<li><p>以 <code class="docutils literal notranslate"><span class="pre">StepLR</span></code> - 等间隔调整学习率 为例子</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">optim</span><span class="o">.</span><span class="n">lr_scheduler</span><span class="o">.</span><span class="n">StepLR</span><span class="p">(</span><span class="n">optimizer</span><span class="p">,</span> <span class="n">step_size</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span> <span class="c1">#调用学习率策略 StepLR</span>
+<span class="c1"># 此时 lr_scheduler 与 optimizer 相关联</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>  <span class="kn">import</span> <span class="nn">torch</span>
+  <span class="kn">import</span> <span class="nn">torch.optim</span> <span class="k">as</span> <span class="nn">optim</span>
+  <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+  <span class="kn">import</span> <span class="nn">pdb</span>
+  <span class="c1"># //设置初始学习率</span>
+  <span class="n">LR</span> <span class="o">=</span> <span class="mf">0.1</span>        
+  <span class="n">iteration</span> <span class="o">=</span> <span class="mi">10</span>
+  <span class="n">max_epoch</span> <span class="o">=</span> <span class="mi">200</span> 
+  <span class="c1"># --------- fake data and optimizer  ---------</span>
+
+  <span class="n">weights</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">((</span><span class="mi">1</span><span class="p">),</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+  <span class="c1"># weights==tensor([0.7652], requires_grad=True)</span>
+  <span class="n">pdb</span><span class="o">.</span><span class="n">set_trace</span><span class="p">()</span>
+
+  <span class="n">target</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">))</span>
+  <span class="c1"># target==tensor([0.])</span>
+
+  <span class="c1"># //构建虚拟优化器，为了 lr_scheduler关联优化器 </span>
+  <span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">([</span><span class="n">weights</span><span class="p">],</span> <span class="n">lr</span><span class="o">=</span><span class="n">LR</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+
+  <span class="c1"># ---------------- 1 Step LR --------</span>
+  <span class="c1"># flag = 0</span>
+  <span class="n">flag</span> <span class="o">=</span> <span class="mi">1</span>
+  <span class="k">if</span> <span class="n">flag</span><span class="p">:</span>
+  <span class="c1"># //设置optimizer、step_size等间隔数量：多少个epoch之后就更新学习率lr、gamma</span>
+      <span class="n">scheduler_lr</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">lr_scheduler</span><span class="o">.</span><span class="n">StepLR</span><span class="p">(</span><span class="n">optimizer</span><span class="p">,</span> <span class="n">step_size</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>  <span class="c1"># 设置学习率下降策略</span>
+
+      <span class="n">lr_list</span><span class="p">,</span> <span class="n">epoch_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(),</span> <span class="nb">list</span><span class="p">()</span>
+      <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_epoch</span><span class="p">):</span>
+
+          <span class="n">lr_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">scheduler_lr</span><span class="o">.</span><span class="n">get_last_lr</span><span class="p">())</span>
+          <span class="n">epoch_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">epoch</span><span class="p">)</span>
+
+          <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iteration</span><span class="p">):</span>
+
+              <span class="n">loss</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">pow</span><span class="p">((</span><span class="n">weights</span> <span class="o">-</span> <span class="n">target</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+              <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+  <span class="c1"># //优化器参数更新</span>
+              <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+              <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+  <span class="c1">#//学习率更新</span>
+          <span class="n">scheduler_lr</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+      <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">epoch_list</span><span class="p">,</span> <span class="n">lr_list</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Step LR Scheduler&quot;</span><span class="p">)</span>
+      <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Epoch&quot;</span><span class="p">)</span>
+      <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Learning rate&quot;</span><span class="p">)</span>
+      <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+      <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
 </section>
 
         </article>
@@ -231,23 +288,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="lihang/lihang_statics.html">
+          <a class="next-page" href="../al/leetcode.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">统计学习</div>
+                <div class="title">leetcode</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../cpp/csapp.html">
+          <a class="prev-page" href="lihang_statics.html">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">CSAPP_learn</div>
+                <div class="title">统计学习</div>
                 
               </div>
             </a>
@@ -271,8 +328,28 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Learning rate scheduler</a><ul>
+<li><a class="reference internal" href="#reference">reference</a></li>
+<li><a class="reference internal" href="#overview">overview</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
