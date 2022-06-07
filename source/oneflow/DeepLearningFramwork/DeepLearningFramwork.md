@@ -6,8 +6,7 @@
 - 举例而言，在 TensorFlow 中，“MatMul” op 对应的 kernel 是 class MatMulOp<Device, T, USE_CUBLAS>。这个模板类的每一个全特化对应的都是一个真正的 kernel，所以在 "MatMul" op 这个概念之下，其实有着很多的 kernel。例如 CPU 实现的针对于 float 数据类型的 kernel（三个模板参数是 kCPU, float, false ），GPU上使用 cublas实 现的针对 float 的 kernel（kGPU, float, true），GPU 上不用 cublas 实现的针对 half 数据类型的 kernel（kGPU, half, false）等等。
 - op 是多个有共性的 kernel 的抽象
 ## define user op
-
-  1. 在 oneflow/ir/include/OneFlow/OneFlowUserOps.td 定义 op
+  ### 在 oneflow/ir/include/OneFlow/OneFlowUserOps.td 定义 op
   ```
   def OneFlow_LeakyReluOp : OneFlow_BaseOp<"leaky_relu", [NoSideEffect, DeclareOpInterfaceMethods<UserOpCompatibleInterface>]> {
   let input = (ins
@@ -24,10 +23,12 @@
   let has_get_sbp_fn = 1;
   let has_data_type_infer_fn = 1;
     }
-    ```
-  2. 新增 Op 定义之后，需要重新 make，此时会自动在 build 目录下的 oneflow/core/framework/ 目录下生成文件 op_generated.h和 op_generated.cpp ，op_generated.h 负责生成定义 op 时定义的接口，但是接口的实现需要在 oneflow/user/ops/leaky_relu_op.cpp 实现
+  ```
+  ### 新增 Op 定义之后，需要重新 make.
+  此时会自动在 build 目录下的 oneflow/core/framework/ 目录下生成文件 op_generated.h和 op_generated.cpp ，op_generated.h 负责生成定义 op 时定义的接口，但是接口的实现需要在 oneflow/user/ops/leaky_relu_op.cpp 实现
 
-  3. 实现定义、生成的接口 oneflow/user/ops/leaky_relu_op.cpp
+  ### 实现定义、生成的接口 
+  oneflow/user/ops/leaky_relu_op.cpp
   ```
     #include "oneflow/core/framework/framework.h"
     #include "oneflow/core/framework/op_generated.h"
@@ -60,11 +61,11 @@
 
     }  // namespace oneflow
     ......
-    ```
+  ```
 
-    4. 实现在 kernel 里的计算逻辑 CPU/GPU
+  ### 实现在 kernel 里的计算逻辑 CPU/GPU
     
-    ```
+  ```
     template<typename T>
     class CpuLeakyReluKernel final : public user_op::OpKernel {
     public:
@@ -84,9 +85,9 @@
     bool AlwaysComputeWhenAllOutputsEmpty() const override { return false; }
     };
 
-    ```
+  ```
 
-    5. 定义+实现计算逻辑后，对 op 进行注册，使用宏 `REGISTER_USER_KERNEL`
+  ### 定义+实现计算逻辑后，对 op 进行注册，使用宏 `REGISTER_USER_KERNEL`
    
     ```
     #define REGISTER_CPU_LEAKY_RELU_KERNEL(dtype)             \
@@ -96,7 +97,7 @@
                        & (user_op::HobDataType("y", 0) == GetDataType<dtype>::value));
     ```
 
-    6. 将op注册到Functional接口，Functional接口通过Python C扩展，使用户能使用Python代码调用该op.
+    1. 将op注册到Functional接口，Functional接口通过Python C扩展，使用户能使用Python代码调用该op.
         `oneflow/oneflow/core/functional/impl/activation_functor.cpp`
         ```
         # 注册到Functional接口
@@ -115,7 +116,7 @@
         std::shared_ptr<OpExpr> op_;
         };
         ```
-    7. functional 通过 yaml 配置文件，自动帮我们生成接口，在 `oneflow/oneflow/core/functional/functional_api.yaml` 配置接口
+  ### functional 通过 yaml 配置文件，自动帮我们生成接口，在 `oneflow/oneflow/core/functional/functional_api.yaml` 配置接口
     ``` 
     - name: "leaky_relu" # 其中name表示导出到python接口后函数的名字,flow._C.leaky_relu(...)
     signature: "Tensor (Tensor x, Float alpha) => LeakyRelu" # signature表示的是函数的返回值类型，输入类型
