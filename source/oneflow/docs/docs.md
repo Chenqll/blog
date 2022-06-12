@@ -143,6 +143,9 @@
       发现她是在oneflow包里找的，在的 PYTHONPATH 里，导入的第一优先级，是导入你的这个源码里的 oneflow，但是你的源码 oneflow 没有编译通过，所以就凉了。
         
       把环境变量删除 ```unset PYTHONPATH```,把这个环境变量删除。就不会第一导入你的源码路径。这样就可以顺位找其它的 oneflow了（pip安装的）
+#### Python 版本不对
+     想要修改 .py 文件的 docstring ，必须重新编译 oneflow，此时要求内置调用的 oneflow 是编译安装的而不是 pip 安装的。
+     编译好的 oneflow 需要保证内置的 python 版本与使用 sphinx-build 时的 python 版本一致。当一开始就是在 conda 环境的话，不同功能使用时 API 版本不对的问题就不会出现。
 
 #### 关于signature
       如果不加 signature，又是 C++ 直接导出的接口，那么 signature 其实是无参的。就可能是错的。
