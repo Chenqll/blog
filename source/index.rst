@@ -14,6 +14,7 @@ Welcome to ChenBlog's documentation!
    cpp/csapp
    dp/index
    al/leetcode
+   libai/index
 
 
 Indices and tables

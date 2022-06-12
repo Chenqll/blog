@@ -25,6 +25,7 @@
   ```
   cmake .. -C ../cmake/caches/cn/cpu.cmake
   ```
+
 ## 常见问题
 - 编译过程出错：需要删除build环境重新编译 `rm -rf build`
 - 在15，16号机器，编译需要在gcc环境下，将clang环境改为gcc    
@@ -52,3 +53,4 @@ cmake_build_type: Release
 rdma: False
 mlir: False
 ```
+- 
