@@ -7,6 +7,11 @@
     name.exe
     ```
 ### malloc 函数
+- C++ 中的malloc() 函数将一块未初始化的内存分配给一个指针。它在cstdlib 头文件中定义。
+  ```c++
+    // allocate memory of int size to an int pointer
+    int* ptr = (int*) malloc(sizeof(int));
+  ```
 ## 结构体
 - https://blog.csdn.net/qq_51534890/article/details/118637720
 ### 1.general

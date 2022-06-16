@@ -32,3 +32,46 @@
   |b,a,c|中序|根在中|
   |b,c,a|后序|根在后|
 - 层次遍历与前序一致
+
+### 二叉树题目
+#### 二叉树的递归方法：前序 中序 后序
+- 前序->刚进入一个节点时执行，从根结点出发 ABC
+- 中序->一个结点的左子树遍历完，即将遍历右子树时执行，根在中 BAC
+- 后序->将要离开一个结点时执行，根在后 BCA
+#### 递归解决问题的方法
+**以 DepthLength 为例**：
+- 遍历方法
+  ```c++
+  void traverse(TreeNode* root){
+      // 二叉树递归时的必要操作，判断当前结点是否为空
+      if (root == NULL){// 指针判断是否为空只能用 `NULL` 关键字 
+            return 0;
+      }
+      depth++;//前序操作
+      res=max(depth,res);//这个操作放在哪儿都行
+      traverse(root->left);
+      traverse(root->right);
+      depth--;//
+      return depth;
+  }
+  ```
+- 分解方法
+  ```c++
+  void traverse(TreeNode* root){
+      if (root == NULL){
+          return 0;
+      }
+      leftMax=traverse(root->left);
+      rightMax=traverse(rott->right);
+      return max(leftMax,rightMax)+1;
+  }
+  ```
+
+#### 综上,遇到一道二叉树的题目时的通用思考过程
+- 是否可以通过**遍历**一遍二叉树得到答案？如果可以，用一个 traverse 函数配合外部变量来实现。
+- 是否可以定义一个**递归函数**，通过*子问题*（子树）的答案推导出原问题的答案？如果可以，写出这个递归函数的定义，并充分利用这个函数的返回值。
+- 无论使用哪一种思维模式，你都要明白二叉树的每一个节点需要做什么，需要在什么时候（前中后序）做。
+|二叉树相关题目|
+|------|-------|-------|
+|前序遍历|中序遍历|后序遍历|
+|[最大深度问题](https://leetcode.cn/problems/maximum-depth-of-binary-tree/)|||
