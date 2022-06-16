@@ -202,4 +202,49 @@
    - 使用 furo 自定义的[表格类型](https://pradyunsg.me/furo/reference/tables/)，在 tensor.rst 文件内构造表格形式，并使用 `:class` 指令，重定向到算子详情页。
 
 
-  
+## Incoming work
+### finished work
+
+index.rst oneflow.rst oneflow.nn.rst oneflow.nn.functional.rst oneflow.Tensor.rst oneflow.autograd.rst
+
+
+|  problem in oneflow.rst | only url in oneflow.rst|math type in oneflow.rst|
+|  ----------  |----------  |----------  |
+|  [zeros_like](https://oneflow.readthedocs.io/en/master/oneflow.html#oneflow.zeros_like)  |[seed](https://oneflow.readthedocs.io/en/master/oneflow.html#oneflow.seed)|[tanh](https://oneflow.readthedocs.io/en/master/oneflow.html#oneflow.tanh)|
+|   [ones_like](https://oneflow.readthedocs.io/en/master/oneflow.html#oneflow.ones_like)  |[manual_seed](https://oneflow.readthedocs.io/en/master/oneflow.html#oneflow.manual_seed)|
+| [nonzero](https://oneflow.readthedocs.io/en/master/oneflow.html#oneflow.nonzero) |[initial_seed](https://oneflow.readthedocs.io/en/master/oneflow.html#oneflow.initial_seed)|
+|[t](https://oneflow.readthedocs.io/en/master/oneflow.html#oneflow.t) |[get_rng_state](https://oneflow.readthedocs.io/en/master/oneflow.html#oneflow.get_rng_state)|
+||[set_rng_state](https://oneflow.readthedocs.io/en/master/oneflow.html#oneflow.set_rng_state)|
+
+oneflow.nn.Module 有文档，oneflow.nn.ModuleDict 没有文档
+| problem in nn.rst|only url in nn.rst|math type in nn.rst|
+|----------|----------|----------|
+|[Module](https://oneflow.readthedocs.io/en/master/module.html#oneflow.nn.Module)||[nn.ELU](https://oneflow.readthedocs.io/en/master/nn.html#oneflow.nn.ELU)|
+|[ModuleDict](https://oneflow.readthedocs.io/en/master/nn.html#oneflow.nn.ModuleDict)||[nn.Hardsigmoid](https://oneflow.readthedocs.io/en/master/nn.html#oneflow.nn.Hardsigmoid)|
+|[ModuleList](https://oneflow.readthedocs.io/en/master/nn.html#oneflow.nn.ModuleList)||[nn.Hardtanh](https://oneflow.readthedocs.io/en/master/nn.html#oneflow.nn.Hardtanh)|
+|[ParameterDict](https://oneflow.readthedocs.io/en/master/nn.html#oneflow.nn.oneflow.nn.ParameterDict)||[nn.LeakyReLU](https://oneflow.readthedocs.io/en/master/nn.html#oneflow.nn.LeakyReLU)|
+|[ParameterList](https://oneflow.readthedocs.io/en/master/nn.html#oneflow.nn.oneflow.nn.ParameterList)||[nn.LogSigmoid](https://oneflow.readthedocs.io/en/master/nn.html#oneflow.nn.LogSigmoid)|
+|||[nn.PReLU](https://oneflow.readthedocs.io/en/master/nn.html#oneflow.nn.PReLU)|
+|||[nn.nn.ReLU](https://oneflow.readthedocs.io/en/master/nn.html#oneflow.nn.nn.ReLU)|
+|||[nn.nn.SELU](https://oneflow.readthedocs.io/en/master/nn.html#oneflow.nn.nn.SELU)|
+|||[nn.nn.CELU](https://oneflow.readthedocs.io/en/master/nn.html#oneflow.nn.nn.CELU)|
+|||[nn.nn.GELU](https://oneflow.readthedocs.io/en/master/nn.html#oneflow.nn.nn.GELU)|
+|||[nn.nn.SiLU](https://oneflow.readthedocs.io/en/master/nn.html#oneflow.nn.nn.SiLU)|
+|||[nn.nn.Sigmoid](https://oneflow.readthedocs.io/en/master/nn.html#oneflow.nn.nn.Sigmoid)|
+|||[nn.nn.Mish](https://oneflow.readthedocs.io/en/master/nn.html#oneflow.nn.nn.Mish)|
+|||[nn.nn.Softplus](https://oneflow.readthedocs.io/en/master/nn.html#oneflow.nn.nn.Softplus)|
+|||[nn.nn.FusedBatchNorm1d](https://oneflow.readthedocs.io/en/master/nn.html#oneflow.nn.nn.FusedBatchNorm1d)|
+|||[nn.nn.FusedBatchNorm2d](https://oneflow.readthedocs.io/en/master/nn.html#oneflow.nn.nn.FusedBatchNorm2d)|
+|||[nn.nn.FusedBatchNorm3d](https://oneflow.readthedocs.io/en/master/nn.html#oneflow.nn.nn.FusedBatchNorm3d)|
+
+
+nn.functional的 only url 摘要提取第二句而非第一句带链接的摘要
+
+| problem in nn.functional.rst|only url in nn.functional.rst|math type in nn.functional.rst|
+|----------|----------|----------|
+|||[conv1d](https://oneflow.readthedocs.io/en/master/functional.html#oneflow.nn.functional.conv1d)|
+|||[conv2d](https://oneflow.readthedocs.io/en/master/functional.html#oneflow.nn.functional.conv2d)|
+|||[conv3d](https://oneflow.readthedocs.io/en/master/functional.html#oneflow.nn.functional.conv3d)|
+|[threshold](https://oneflow.readthedocs.io/en/master/functional.html#oneflow.nn.functional.threshold)|||
+
+
