@@ -71,3 +71,16 @@ stu->age=19//指针通过->操作符可以访问成员,通过地址赋值改变 
         stu->age = 28;
     }
   ```
+## Vector
+- vector https://blog.csdn.net/m0_61548909/article/details/124215519
+### Intro
+- 可变大小数组的序列容器。
+- 使用 vector
+  ```c++
+    std::vector<int> first; // empty vector of ints
+		std::vector<int> second(4, 100); // four ints with value 100
+		std::vector<int> third(second.begin(), second.end()); // iterating through second
+		std::vector<int> fourth(third); // a copy of third
+  ```
+## 单链表 LinkedList
+node->next 指向下一 node 的地址，当返回值为 node->next 时，返回的是以node 为头结点的链表结构

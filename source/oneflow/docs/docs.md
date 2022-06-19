@@ -4,12 +4,17 @@
 - https://github.com/Oneflow-Inc/community/pull/12
 
 ```
-  git clone git@github.com:Oneflow-Inc/oneflow-api-cn.git
-  cd oneflow-api-cn
+  git clone git@github.com:Oneflow-Inc/oneflow.git
+  cd oneflow
   python3 -m pip install pybind11 --user // pybind11 是一个 header-only 的库，换句话说，只需要 C++ 项目里直接 include pybind11 的头文件就能使用
   python3 -m pip install -r docs/requirements.txt --user
   python3 setup.py install --user
 ```
+- 如果修改了 `oneflow` 目录下的内容，比如 `oneflow/python/oneflow/framwork/xxx.py` 内的 docstring ，想要看到效果，需要进入 `oneflow/build` 目录重新编译 oneflow 后再编译 html
+  ```bash
+  cd ../build && make -j4
+  cd ../docs && make html
+  ```
 
 ## rebuild docs
 ### **Sphinx** 
@@ -67,6 +72,203 @@
 
 ### **Furo** 
   - sphinx 文档生成的一种样式，可以实现主题的整体外观和感觉的定制，[文档](https://pradyunsg.me/furo/)
+
+## 按照模块进行重构
+### oneflow
+#### pytorch 有的然而 oneflow 没有的接口,包括在oneflow.tensor下而没在oneflow下的，比如 `oneflow.Tensor.triu`
+- oneflow/tensor 下
+  
+is_storage is_complex is_conj get_default_dtype set_default_tensor_type set_flush_denormal
+
+- oneflow/Tensor/creation op 下
+    sparse_coo_tensor 
+    asarray 
+    range 
+    logspace 
+    empty_like 
+    empty_strided    
+    full_like
+    quantize_per_tensor
+    quantize_per_channel
+    dequantize
+    complex
+    polar
+    heaviside
+- oneflow/tensor/indexing...下
+  adjoint
+  conj
+  dsplit
+  column_stack
+  dstack
+  hstack
+  index_add
+  moveaxis
+  row_stack
+  diagonal_scatter
+  select_scatter
+  slice_scatter
+  scatter_reduce
+  take
+  take_along_dim
+  tensor_split
+  vsplit
+  vstack
+
+- Generator
+
+- oneflow/random sampling/In-place random sampling 除了normal_ 整个目录没有 ??
+- oneflow/random sampling xia
+  multinomial
+  poisson
+  rand_like
+  randint_like
+  randn_like
+- Quasi-random sampling 无
+- oneflow/pall xia
+  get_num_threads
+  get_num_interop_threads
+  set_num_interop_threads
+- oneflow/math op/pointwise op
+  absolute
+  angle
+  arctan2
+  bitwise_and
+  bitwise_not
+  bitwise_or
+  bitwise_xor
+  bitwise_left_shift
+  bitwise_right_shift
+  conj_physical
+  copysign
+  deg2rad
+  divide
+  digamma
+  exp2
+  fake_quantize_per_channel_affine
+  fake_quantize_per_tensor_affine
+  fix
+  float_power
+  floor_divide
+  frac
+  frexp
+  gradient
+  imag
+  ldexp
+  lerp
+  lgamma
+  logaddexp
+  logaddexp2
+  logit
+  hypot
+  i0
+  igamma
+  igammac
+  multiply
+  mvlgamma
+  nan_to_num
+  nextafter
+  polygamma
+  positive
+  quantized_batch_norm
+  quantized_max_pool1d
+  quantized_max_pool2d
+  rad2deg
+  real
+  remainder
+  signbit
+  sinc
+  tanh
+  true_divide
+  trunc
+  xlogy
+  subtract
+- oneflow/math op/reduce op
+  aminmax
+  all
+  dist
+  logsumexp
+  nanmean
+  nanmedian
+  mode
+  norm
+  nansum
+  quantile
+  nanquantile
+  std_mean
+  var_mean
+  count_nonzero
+  unique
+  unique_consecutive
+- oneflow/math op/compare op
+  allclose
+  ge
+  greater_equal
+  greater
+  isclose
+  isfinite
+  isin
+  isposinf
+  isneginf
+  isreal
+  kthvalue
+  less_equal
+  less
+  maximum
+  minimum
+  fmax
+  fmin
+  not_equal
+  msort
+- oneflow/math op/spectal op 所有都没有
+- oneflow/math op/other op
+  atleast_1d
+  atleast_2d
+  atleast_3d
+  bincount
+  block_diag
+  broadcast_tensors
+  broadcast_to
+  broadcast_shapes
+  bucketize
+  cartesian_prod
+  cdist
+  combinations
+  corrcoef
+  cov
+  cross
+  cummax
+  cummin
+  diag_embed
+  diagflat
+  diff
+
+  fliplr
+  flipud
+  kron
+  rot90
+  gcd
+  histc
+  histogram
+  histogramdd
+  lcm
+  logcumsumexp
+  ravel
+  renorm
+  repeat_interleave
+  trace
+  tril_indices
+  triu
+  triu_indices
+  vander
+  view_as_real
+  view_as_complex
+  resolve_conj
+  resolve_neg
+
+#### pytorch 重构方法
+- 主要讲的是 pytorch 的数据 Tensor 和常见操作等
+- Tensor-> 张量的内置属性/Tensor/creation op -> 创建操作
+
   
 ## 解惑
 #### /oneflow-api-cn/docs/source/cn/activation_ops.py 里的中文是哪来的？

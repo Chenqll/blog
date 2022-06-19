@@ -21,9 +21,9 @@
     # will generate a name.exe then run it
     name.exe
     ```
-### 完全二叉树与满二叉树
+### 1、完全二叉树与满二叉树
 - 完全二叉树需从 1 开始标号，并且 Parent=Child/2 
-### 二叉树的遍历
+### 2、二叉树的遍历
 - 假设一个 A，B，C 的满二叉树
 - 序列遍历
   |从左到右的遍历方式有三种|
@@ -33,12 +33,12 @@
   |b,c,a|后序|根在后|
 - 层次遍历与前序一致
 
-### 二叉树题目
-#### 二叉树的递归方法：前序 中序 后序
+### 3、二叉树题目
+#### 3.1 二叉树的递归方法：前序 中序 后序
 - 前序->刚进入一个节点时执行，从根结点出发 ABC
 - 中序->一个结点的左子树遍历完，即将遍历右子树时执行，根在中 BAC
 - 后序->将要离开一个结点时执行，根在后 BCA
-#### 递归解决问题的方法
+#### 3.2 递归解决问题的方法
 **以 DepthLength 为例**：
 - 遍历方法
   ```c++
@@ -67,11 +67,174 @@
   }
   ```
 
-#### 综上,遇到一道二叉树的题目时的通用思考过程
+#### 3.3 综上,遇到一道二叉树的题目时的通用思考过程
 - 是否可以通过**遍历**一遍二叉树得到答案？如果可以，用一个 traverse 函数配合外部变量来实现。
 - 是否可以定义一个**递归函数**，通过*子问题*（子树）的答案推导出原问题的答案？如果可以，写出这个递归函数的定义，并充分利用这个函数的返回值。
 - 无论使用哪一种思维模式，你都要明白二叉树的每一个节点需要做什么，需要在什么时候（前中后序）做。
-|二叉树相关题目|
-|------|-------|-------|
-|前序遍历|中序遍历|后序遍历|
-|[最大深度问题](https://leetcode.cn/problems/maximum-depth-of-binary-tree/)|||
+- **前序遍历**
+  ```c++
+  List<Integer> preorderTraverse(TreeNode* root){
+    List<Integer> res = new List<Integer>();
+    if (root == NULL){
+      return 0;
+    }
+    res.add(root->val);
+    res.addAll(preorderTraverse(root->left));
+    res.addAll(preorderTraverse(roo->right));
+    return res;
+  }
+  ```
+- **层序遍历**
+  ```c++
+  
+  ```
+
+#### 3.4 刷题：
+- 1. 二叉树的深度问题 leetcode 104
+  ```c++
+  viod traverse(TreeNode* root){
+    if (root == NULL){
+      return 0;
+    }
+    int leftMax=traverse(root->left);
+    int rightMax=traverse(root->right);
+    return max(leftMax,rightMax)+1;//一个后序遍历，在离开一个结点时进行操作
+  }
+  ```
+- 2. 二叉树的直径问题 leetcode 543
+  - 每个结点最大左子树 depth + 最大右子树 depth。
+  - 最大子树 depth 与二叉树的 depth 深度一致，可以直接用。
+  ```c++
+  viod dia(TreeNode* root){
+    if (root == NULL){
+      return 0;
+    }
+    int leftMax=traverse(root->left);
+    int rightMax=traverse(root->right);
+    return leftMax+rightMax;
+  }
+  viod traverse(TreeNode* root){
+    int leftMax=traverse(root->left);
+    int rightMax=traverse(root->right);
+    return max(leftMax,rightMax)+1;
+
+  }
+  ```
+## 动态规划
+### General
+base case -> 状态 -> 选择
+
+**以凑零钱问题** 讲解 General 解法：
+```c++
+int coinChange(int[] coins,int n){
+  return dp(coins,n);
+}
+// 状态为 int[] coins,int amount;
+// 选择为 int coin:coins 状态由于选择的改变而改变
+int dp(int[] coins,int amount){
+  if(amount == 0) return 0;
+  if(amount==-1) return -1;
+  for (int coin:coins){
+    int subproblem=dp(coins,amount-coin);
+    if (subproblem == -1)continue;
+    res=min(res,subproblem+1);
+  }
+  return res==Integer.MAX?-1:res;
+
+}
+```
+
+**以斐波那契数列**为例 讲解 memo 常用方法：
+```c++
+int fin(int n){
+  if (n==0 || n==1)return n;//base case
+  return fin(n-1)+fin(n-2)//fn=fn-1+fn-2 状态转移方程 
+}
+
+// 加 memo 数组减少时间复杂度：
+int fin(int n){
+  int memo[]=new int[n+1];
+  return helper(memo,n);
+}
+int helper(int[] memo,int n){
+  if (n==0||n==1)return n;
+  if(memo[n]!=0) return memo[n];
+  memo[n]=helper(memo,n-1)+helper(memo,n-2);
+  return memo[n];
+}
+```
+## 回溯问题
+## 链表算法
+### 技巧1-虚拟头结点
+以**链接两个有序链表**为例：
+```c++
+// 定义虚拟头结点 作为最后返回的结果链表
+// 定义 P 指针，作为活动指针
+// 其实就是 dummy 头结点的地址指向了 p，p 向后扩充的时候，dummy 作为头结点，只要 dummy->next 就能得到后面 p 链接的单链表了 
+ListNode mergeTwoLists(ListNode* list1,ListNode* list2){
+  // 定义一个虚拟头结点 dummy
+  ListNode* dummy=ListNode(-1);
+  // 将 dummy 的首地址赋值给 p，p 不断向后向后扩充该链表
+  ListNode* p=dummy;
+  ListNode* p1=list1;
+  ListNode* p2=list2;
+  // 链表有两个操作
+  // 1. 将 p1 结点赋值给 p->next=p1 ，此时 p1 结点的地址域只是被赋值。
+  // 2. 结点滑动 `p=p->next`，此时将下一节点的地址值赋值给 p，此时才能算是将 p1 结点加入到 dummy 中了。
+  while(p1 != NULL && p2 != NULL){
+    if(p1->val > p2->val){
+      p->next=p2;
+      p2->next=p2;
+    }else{
+      p->next=p1;
+      p1->next=p1;
+    }
+    p=p->next;
+  }
+  if(p1 == NULL){
+    p->next=p2;
+  }
+  if (p2 ==NULL){
+    p->next=p1;
+  }
+  return dummy->next;
+  
+}
+```
+**分割链表**：
+```c++
+ListNode* partition(ListNode* head,int x){
+  //分别开辟两个虚拟头结点，分别存储小于x，和大于等于x的 p
+  // 返回多少个链表就需要多少个虚拟头结点 dummy
+  ListNode* dummy1=new ListNode(-1);
+  ListNode* dummy2=new ListNode(-1);
+  // 两个分别的p动点，多少个 dummy 就需要多少个子动点
+  ListNode* p1;
+  ListNode* p2;
+
+  p1=dummy1；
+  p2=dummy2;
+
+  //总动点遍历整个链表，一个链表需要一个动点进行连接，
+  ListNode* p=head;
+
+  // 使用 while 循环，保证p结点往下遍历
+  while(p!=NULL){
+    if(p->val>=x){
+      p2->next=p;
+      p2=p2->next;
+    }else{
+      p1->next=p;
+      p1=p1->next;
+    }
+    // 解脱 p 结点，p要在源链表往后走
+    //??????????????????????????????
+    ListNode* temp=p->next;
+    p->next=NULL;
+    p=temp;
+  }
+  //要获取一个结点后的链表结构，需要用 dummy->next 获得
+  p1->next=dummy2->next;
+  return dummy2->next;
+}
+```
