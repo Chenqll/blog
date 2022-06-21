@@ -74,6 +74,7 @@
   - sphinx 文档生成的一种样式，可以实现主题的整体外观和感觉的定制，[文档](https://pradyunsg.me/furo/)
 
 ## 按照模块进行重构
+interface is consistent with pytorch 的接口顺序我都改了
 ### oneflow
 #### pytorch 有的然而 oneflow 没有的接口,包括在oneflow.tensor下而没在oneflow下的，比如 `oneflow.Tensor.triu`
 - oneflow/tensor 下
@@ -264,7 +265,69 @@ is_storage is_complex is_conj get_default_dtype set_default_tensor_type set_flus
   view_as_complex
   resolve_conj
   resolve_neg
-
+- oneflow/math op /BLAS and LAPACK Operations 下
+  addbmm
+  addmv
+  addr
+  baddbmm
+  chain_matmul
+  cholesky
+  cholesky_inverse
+  cholesky_solve
+  eig
+  geqrf
+  ger
+  inner
+  inverse
+  det
+  logdet
+  slogdet
+  lstsq
+  lu
+  lu_solve
+  lu_unpack
+  matrix_power
+  matrix_rank
+  matrix_exp
+  mv
+  orgqr
+  ormqr
+  outer
+  pinverse
+  qr
+  svd
+  svd_lowrank
+  pca_lowrank
+  symeig
+  lobpcg
+  trapz
+  trapezoid
+  cumulative_trapezoid
+  triangular_solve
+  vdot
+- oneflow/utilities 下的都没有
+### OneFlow.nn 
+#### content 目录缺少 Recurrent Layers/Transformer Layers/Shuffle Layers/Utilities/Quantized Functions/Lazy Modules Initialization
+- oneflow.nn/recurrent layers 下    
+    nn.RNNBase
+    nn.RNN
+    nn.LSTM
+    nn.GRU
+    nn.RNNCell
+    nn.LSTMCell
+    nn.GRUCell
+- oneflow/Transformer Layers 下都没有
+- oneflow.nn/container/Global Hooks For Module 都没有？？
+- oneflow.nn/Convolution Layers 下的 lazy 初始化的类都没有？
+    nn.LazyConv1d
+    nn.LazyConv2d
+    nn.LazyConv3d
+    nn.LazyConvTranspose1d
+    nn.LazyConvTranspose2d
+    nn.LazyConvTranspose3d
+    nn.Unfold
+    nn.Fold
+- oneflow.nn/pooling layer
 #### pytorch 重构方法
 - 主要讲的是 pytorch 的数据 Tensor 和常见操作等
 - Tensor-> 张量的内置属性/Tensor/creation op -> 创建操作
@@ -358,6 +421,12 @@ is_storage is_complex is_conj get_default_dtype set_default_tensor_type set_flus
 
 #### 为了避免 conflicts
       需要在 master 分支上先 ```git pull origin master``` 再 checkout -b
+
+#### 关于 oneflow.nn 和 oneflow.nn.functional 重复的一些问题：
+- oneflow.nn.functional 是从原生的 C++ 框架内导出的接口
+- oneflow.nn 更多是在 python 的范围内拼凑的
+- 哪一个更常用？两者之间如何转化写出nn有而nn.functional 没有的 nn.functional 的接口？
+
 
 
   

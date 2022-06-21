@@ -238,3 +238,4 @@ ListNode* partition(ListNode* head,int x){
   return dummy2->next;
 }
 ```
+### 技巧二-双指针

@@ -15,6 +15,7 @@ Welcome to ChenBlog's documentation!
    dp/index
    al/leetcode
    libai/index
+   paper_read/index
 
 
 Indices and tables
