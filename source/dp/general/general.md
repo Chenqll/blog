@@ -1,9 +1,14 @@
-# Learning rate scheduler
-## reference
+# General
+## baseline
+## Graph
+### 静态图
+### 动态图
+## Learning rate scheduler
+### reference
 - `https://www.cnblogs.com/peachtea/p/13532209.html`
 - `https://zhuanlan.zhihu.com/p/520719314`
   
-## overview
+### overview
 - lr --> optimizer
 - Pytorch 有6种学习率调整策略，都继承自 `class_LRScheduler` 
   ```python
@@ -70,3 +75,7 @@
         plt.show()
 
   ```
+## 使用 numpy 手工实现反向传播
+```python
+
+```

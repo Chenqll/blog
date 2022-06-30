@@ -65,5 +65,21 @@
 
 - git log --stat 查看当前工作区将要push的内容
 
+
+## 当去到一个新环境，怎么在远程拉取github上分支的内容
+```bash
+// 网络连接不好时，先链接ssh
+cd .ssh && cat id_rsa.pub
+
+// 先clone代码
+git clone git@github.com:Oneflow-Inc/oneflow.git
+
+git checkout -b docsv0.8 origin/docsv0.8
+
+// 设置同样的账号邮箱
+git config --global user.email 2398653527@qq.com
+git config --global user.name chenqll
+```
+
 ## github
 - 可以链接 Google，却不能访问 github，这是梯子的问题，“如果是配置而不是全部流量走梯子，GitHub有可能没走代理”。所以应该将梯子的设置改为全部流量走梯子的模式，以避风港为例，将路由设置改为启动高级路由功能。

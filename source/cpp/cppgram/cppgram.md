@@ -73,15 +73,23 @@ stu->age=19//指针通过->操作符可以访问成员,通过地址赋值改变 
   ```
 ## Vector
 - vector https://blog.csdn.net/m0_61548909/article/details/124215519
-### Intro
-- 可变大小数组的序列容器。
+### 1.Intro
+- 可变大小数组的序列容器。称为容器，是因为它可以包含其他对象。一个容器中的所有对象都必须是同一种类型的。
 - 使用 vector
   ```c++
-    std::vector<int> first; // empty vector of ints
-		std::vector<int> second(4, 100); // four ints with value 100
-		std::vector<int> third(second.begin(), second.end()); // iterating through second
-		std::vector<int> fourth(third); // a copy of third
+    vector<int> first; // empty vector of ints
+		vector<int> second(4, 100); // four ints with value 100
+		vector<int> third(second.begin(), second.end()); // iterating through second
+		vector<int> fourth(third); // a copy of third
   ```
+### 2.Attention
+1、如果你要表示的向量长度较长（需要为向量内部保存很多数），容易导致内存泄漏，而且效率会很低；
+
+2、vector 作为函数的参数或者返回值时，需要注意它的写法：
+```c++
+double Distance(vector<int>&a, vector<int>&b)
+// 其中 符号 & 不可少
+```
 ## 单链表 LinkedList
 node->next 指向下一 node 的地址，当返回值为 node->next 时，返回的是以node 为头结点的链表结构
 ## 二叉堆

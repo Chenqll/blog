@@ -238,4 +238,125 @@ ListNode* partition(ListNode* head,int x){
   return dummy2->next;
 }
 ```
-### 技巧二-双指针
+### 递归反转链表
+```c++
+ListNode* reverse(ListNode* head){
+  // base case 用一个 `||` 来进行基础判断
+  // 压栈后的基础单元
+  if(head == NULL || head->next == NULL){
+    return head;
+  }
+  // 不要压栈，按照函数的定义进行解释，reverse(head->next) 的意思就是反转第一个节点后的链表
+  ListNode* last = reverse(head->next);
+  // 链表指针赋值 next 指针指向一个地址，应将一个地址 head 赋值给它
+  head->next->next=head;
+  head->next=NULL;
+  return last;
+}
+```
+### 回文链表
+- 可以用 **后序遍历** 的方式压栈，得到链表的 last 指针，fore 和 last 两端相遇的方法判断
+  ```c++
+  ListNode* fore;
+  boo isPali(ListNode* head){
+     fore=head;
+    return traverse(head);
+  }
+  bool traverse(ListNode* head){
+    ListNode* last=head;
+    // 递归 三大步，第一步：base case
+    if (last == NULL)return true;
+    bool res=traverse(last->next);
+    // 后序遍历ing
+    // 必须和前面的result进行与运算
+    res=res&&fore->val==last->val;
+    fore=fore->next;
+    return res;
+  }
+  ```
+## 数组算法
+### 技巧 1-双指针
+- 只要数组有序，应该想到双指针技巧
+- 以 **删除有序数组的重复项** 为例：
+  ```c++
+  //分析题目：
+  // 1.有序数组，即重复的元素会临近
+  
+  int remove(vector<int>& nums){
+    // 快慢指针的方法可以减少空间复杂度
+    if(nums.size()<2)return nums.size();
+    int j=0;
+    // i 一直在增加，它是快指针，则 j 是慢指针
+    for (int i=0;i<nums.size();i++){
+      if(nums[i]!=nums[j]){
+        nums[i]=nums[++j];
+      }
+    }
+    return i++;
+  }
+  ```
+- **移除元素**
+  ```c++
+  // 移除数组中的元素，要求返回 int 类型，该int 数据为 vector 向量数组前 int 数个的意思
+  int removeElement(vector<int>& nums,int val){
+    // 
+    int slow=0,fast=0;
+    while(fast<nums.sie()){
+      if(nums[fast]!=val){
+        nums[slow]=nums[fasy];
+        slow++;
+      }
+      fast++;
+
+    }
+    return slow;
+  }
+  ```
+- **移动元素**
+  ```c++
+  //在 移除元素 的基础上，移除该元素后(比如移除0元素)，再将对应的元素加入特定位置
+  //需要返回一整个num，此时的返回值为 void
+  void moveVal(vector<int>* nums){
+    int p = removeVal(nums,0);
+    for(;p<nums.size();p++){
+      nums[p]=0;
+    }
+  int removeVal(vector<int>* nums,int val){
+    ... 同上
+  }
+  }
+  ```
+- **反转字符串**
+  ```c++
+  void reverseString(vector<char>* s){
+    //左右互换，则判断条件应为 while(left<right)
+
+  }
+  ```
+- **最长的回文字符**：
+  ```c++
+  
+  ```
+- **链表内的快慢指针**
+  ```c++
+  ListNode* deleteDuplicateElemet(ListNode* head){
+    // 赋值快慢指针
+    ListNode* slow=head;
+    ListNode* fast=head;
+    // 链表的 basecase
+    if(head==NULL)return NULL;
+    // 链表快慢指针的退出循环的方式
+    while(fast!=NULL){
+      if(slow->val!=fast->val){
+        // 链表赋值的方式
+        slow->next=fast;
+        slow=slow->next;
+      }
+      fast=fast->next;
+    }
+    // 记得给链表最后断开
+    slow->next=NULL;
+    return head;
+  }
+  ```
+### 技巧 2 - 前缀和

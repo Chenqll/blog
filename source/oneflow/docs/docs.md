@@ -328,6 +328,46 @@ is_storage is_complex is_conj get_default_dtype set_default_tensor_type set_flus
     nn.Unfold
     nn.Fold
 - oneflow.nn/pooling layer
+
+### oneflow.lingle
+- oneflow.linalg/Matrix Properties 下 
+  diagonal 是oneflow.diagonal 而不是 oneflow.lingle.diagonal
+  det
+  slogdet
+  cond
+  matrix_rank
+- oneflow.linalg/Decompositions 下都没有
+- oneflow.linalg/Inverses 下都没有
+- oneflow.linalg/Matrix Functions下都没有
+- oneflow.linalg/Matrix Products
+  matmul 是 oneflow.matmul 和 oneflow.Tensor.matmul
+  cross
+  multi_dot
+  householder_product
+- oneflow.linalg/Tensor Operations 下都没有
+- oneflow.linalg/misc
+- oneflow.linalg/Experimental Functions
+
+### oneflow.nn.init
+- oneflow.nn.init/
+### oneflow.optim
+- oneflow.optim/base 下
+  Optimizer.add_param_group 无文档
+- oneflow.optim/al 下
+  Adadelta
+  Rprop
+  NAdam
+  SparseAdam
+  Adamax
+  ASGD
+  LBFGS
+  RAdam
+- oneflow.optim/lr_scheduler
+  MultiplicativeLR
+  CyclicLR
+  OneCycleLR
+- oneflow.optim/Stochastic Weight Averaging 都没有
+
 #### pytorch 重构方法
 - 主要讲的是 pytorch 的数据 Tensor 和常见操作等
 - Tensor-> 张量的内置属性/Tensor/creation op -> 创建操作
@@ -468,6 +508,14 @@ is_storage is_complex is_conj get_default_dtype set_default_tensor_type set_flus
             numel
             set_printoptions
         ```
+        ##### autosummary TIPS
+        - autoaummary 是 sphinx 的 extension，应该具体查看 sphinx 的 extension 文档
+  #### 交叉引用：
+  ##### 引用文档
+  - 首先每一个 rst 文件都当做一个文档，并且都需要在 source/index.rst 下的 toctree 进行注册
+  - 当在一个文档内想要引用另一个文档时，使用 `:doc:` 指令，例如 `:doc:example1` 引用 example1 文档
+  ##### 引用小标题
+  - 在一个小标题上添加指令 `.. _example2:`，然后在另一个文件使用 `:ref:`example2`` 指令引用该标题。
   #### 生成表格 （以重构 tensor 模块为例）
    - tensor 模块对标 pytorch 文档的 tensor 模块，发现 *“pytorch 的 tensor 模块以数据类型和 device 类型划分关于tensor 的算子，并采用表格的形式展现”*
    - 使用 furo 自定义的[表格类型](https://pradyunsg.me/furo/reference/tables/)，在 tensor.rst 文件内构造表格形式，并使用 `:class` 指令，重定向到算子详情页。
