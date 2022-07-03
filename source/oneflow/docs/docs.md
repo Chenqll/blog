@@ -520,5 +520,10 @@ is_storage is_complex is_conj get_default_dtype set_default_tensor_type set_flus
    - tensor 模块对标 pytorch 文档的 tensor 模块，发现 *“pytorch 的 tensor 模块以数据类型和 device 类型划分关于tensor 的算子，并采用表格的形式展现”*
    - 使用 furo 自定义的[表格类型](https://pradyunsg.me/furo/reference/tables/)，在 tensor.rst 文件内构造表格形式，并使用 `:class` 指令，重定向到算子详情页。
 
+### 报错解决
+- undefined label: random-sampling
 
+一般都是[交叉引用](#交叉引用)时出现的问题
+
+- 
 

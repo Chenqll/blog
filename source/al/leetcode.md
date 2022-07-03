@@ -359,4 +359,33 @@ ListNode* reverse(ListNode* head){
     return head;
   }
   ```
-### 技巧 2 - 前缀和
+### 技巧 2 - 前缀和数组
+### 技巧 3 - 差分数组
+### 技巧 4 - 翻转数组
+#### 沿对角线翻转
+- 翻转二维矩阵的重点是 “如何将行变为列，如何将列变为行”，能轻松做到这一点的只有沿对角线翻转
+  ```c++
+  void rotate(vecotr<vector<int>>& matrix){
+    // 使用 vector 表示二维数组的方式为 “vector<vector<int>>& matrix” -- 注意 & 符号不能遗漏
+    for (int i =0;i<matrix.size();i++){
+      // 此时 j 一定要从 i 开始，从 0 开始的话 会将原先调换的数字又调换回来
+      for(int j=i;j<matrix.size();j++){
+        swap(matrix[i][j],matrix[j][i]);
+      }
+    }
+  }
+  ```
+#### 行内翻转
+- 实现 reverse 函数，实现行内翻转
+  ```c++
+  // 在二维数组内 如何调用 reverse 函数接口
+  ...
+  for(vector<int>& x :matrix){
+    reverse(x);
+  }
+  ...
+
+  void reverse(vector<int>& arr){
+    // 双指针实现
+  }
+  ```
