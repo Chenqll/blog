@@ -525,5 +525,128 @@ is_storage is_complex is_conj get_default_dtype set_default_tensor_type set_flus
 
 一般都是[交叉引用](#交叉引用)时出现的问题
 
-- 
+- docstring 中写的语法报错
 
+<!-- 
+## torch 和 oneflow distributed 的对比
+### torch 构建 distributed 模块的方式
+- 有 overview，oneflow 也有对应的文档可供参考
+
+
+## 共有模块
+- oneflow.comm == torch.distributed 的 collective function
+
+### oneflow 的distributed 模块的特点：
+#### general
+- 多设备训练会涉及到设备间沟通的成本
+- **数据并行** 会使得反向传播时，各个设备更新的计算的模型梯度不同，导致设备间的模型不同。此时需要通过对各个设备的梯度执行 ALLREDUCE 策略，保证模型一致。适合数据集大，模型小的模型（resnet 50）
+- **模型并行** 会省去 ALLREDUCE，但是需要 Broadcast。适合模型过大，一个设备放不下的场景（bert）
+- **流水并行** 当模型过大时，可以将神经网络切分为多个阶段，分发到不同设备上。
+- **混合并行** 多种策略混用。
+#### sbp
+- 集群的全局视角
+
+
+### oneflow.distributed
+.. note ::
+    Please refer to `PyTorch Distributed Overview <https://docs.oneflow.org/master/parallelism/01_introduction.html>`__
+    for a brief introduction to all features related to distributed training.
+
+- backens **unkonw**
+- basic **unkonw**
+  - 写 global view 的基础模块
+  - 加上一句话，与 pytorch 内容重合的部分
+  - 是否要加 sbp signature
+- initialize **unkon**
+  - 我们需要初始化么？
+  - 可以改为 创建 global tensor 么
+- after initialize **konw in oneflow.env**
+- Distributed Key-Value Store **unkonw**
+- group **unkonw**
+- Point-to-point communication **konw in oneflow.comm of send and recv**
+- collective function **konw in oneflow.comm of remain**
+- Multi-GPU collective functions **konw in oneflow docs and need reconstruct**
+
+
+## 重构思路
+- 1. 对标 pytorch 的 torch.distributed 先引到 docs 文档
+- 2. 直接介绍特性的 global view 和 三个重要概念
+- 3. basic 模块介绍三个重要概念，引出接口
+- 4. 对标 pytorch 的初始化模块，创造 create global tensor 模块
+- 5. Post-initialization 引入 oneflow.env 接口
+- 6. communication collective 引入 oneflow.comm 接口
+- 7. launching
+## 疑问
+- 1. 是否可以引入 oneflow.env 和 oneflow.comm 到 oneflow.distributed 目录下？
+- 2. 文字部分是以一句话简单介绍为好，还是具体解释？
+- 3. 与 pytorch 重合的部分 nn.parallel.DistributedDataParallel 不在此部分做介绍可否？
+
+
+## 7.11-7.16 的合并工作
+- 1. ChenGuoLiang & LiuXuan 负责基础模块的 review
+  
+    主要方式是:
+      按照chengguoliang 的 autograd 的沟通方式，找到对应全职同事将 pytorch 和 oneflow 的文档都过一遍（分模块，分接口），之后按照建议修改
+
+- 5. 文档工作形成文档
+- 7. oneflow.nn.init
+- 8. 环境变量协调
+
+
+
+review for ready
+|  task   | 负责人  |
+|  ----  | ----  |
+| oneflow  | Chengguoliang |
+| oneflow.nn  | Chengguoliang |
+|oneflow.Tensor|Chengguoliang|
+|oneflow.linalg|Chengguoliang|
+|oneflow.nn.init|Chengguoliang|
+|oneflow.utils.data|Chengguoliang|
+|oneflow.optim|Chengguoliang|
+|oneflow.autograd|Chengguoliang|
+|tensor attribute|Liuxuan|
+|oneflow.cuda|Liuxuan|
+|oneflow.nn.functional|Liuxuan|
+|oneflow.rnn 报错问题|Liuxuan|
+|conflict 问题|Liuxuan|
+|oneflow.nn.graph|ChenQiaoLing(Xv Xiaoyu)|
+|oneflow.distributed|ChenQiaoLing(Chen HouJiang,Han BinBin)|
+|oneflow.oneEmbedding|ChenQiaoLing(Guoran)|
+|环境变量|ChenQiaoLing()|
+
+
+## 环境变量翻译工作
+https://github.com/Oneflow-Inc/OneTeam/issues/654
+https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/env.html
+
+#####################
+Environment Variables
+#####################
+
+NCCL has an extensive set of environment variables to tune for specific usage.
+
+ONEFLOW_COMM_NET_IB_HCA
+--------------------------------
+
+当服务器存在多张IB网卡(可通过ibstatus查看)时，系统默认使用第一张IB网卡进行comm_net通信，当设置了这个环境变量后，系统会遍历所有的IB网卡，找到对应名字的网卡
+
+Values accepted
+^^^^^^^^^^^^^^^
+默认为空，形如：mlx5_0:1、mlx5_1:1，当端口为0的时候，默认为1，表示使用第一个端口。
+
+
+## distributed 
+总的来说 分为三个
+1. 共有的命名为 basic 放上 postinit 下的接口
+2. local 有的 放在ddp 目录下，放上 community collection 下的接口
+3. global 特有的 只有两个接口 to_global to_local
+
+
+删除 global view placement sbp三个 改为 basic ddp global tensor
+
+global tensor 需要加示例代码
+
+ddp 的集合通信内容需要仿照 pytorch 写一些关于 all_reduce 的描述
+
+ddp的 docstring 加一些内容 -->
